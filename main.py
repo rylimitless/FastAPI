@@ -5,7 +5,7 @@ count = 0
 
 @app.get("/")
 async def root():
-    gobal count
+    global count
     count +=1
     return {"count":f"{count}"}
 
