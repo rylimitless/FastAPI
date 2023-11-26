@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Request, File, UploadFile
 from fastapi.responses import JSONResponse
-#from typing import Optional
+from typing import Optional
 import os
 
 app = FastAPI()
@@ -25,23 +25,29 @@ async def getcounter():
 async def root():
     return {"message": "Hello World"}
 
-# @app.post("/api/report")
-# async def receive_data(request: Request, screenshot1: Optional[UploadFile] = File(...), screenshot2: Optional[UploadFile] = File(...)):
-#     form = await request.form()
-#     issue = form.get('issue')
+@app.post("/api/report")
+async def receive_data(request: Request, screenshot1: Optional[UploadFile] = File(...), screenshot2: Optional[UploadFile] = File(...)):
+    form = await request.form()
+    issue = form.get('issue')
 
 #     # Save the files or process the data as needed
 
-#     with open(os.path.join("uploads", screenshot1.filename), "wb") as buffer:
-#         content = await screenshot1.read()  # async read
-#         buffer.write(content)
-    
-#     with open(os.path.join("uploads", screenshot2.filename), "wb") as buffer:
-#         content = await screenshot2.read()  # async read
-#         buffer.write(content)
-#     return {"Message: "Hello World"}
+    try:
+        if not os.path.exists("uploads"):
+            os.makedirs("uploads")
 
-#     return JSONResponse(content={"status": "success"}, status_code=200)
+        with open(os.path.join("uploads", screenshot1.filename), "wb") as buffer:
+            content = await screenshot1.read()  # async read
+            buffer.write(content)
+
+        with open(os.path.join("uploads", screenshot2.filename), "wb") as buffer:
+            content = await screenshot2.read()  # async read
+            buffer.write(content)
+
+    except Exception as e:
+        return JSONResponse(content={"error": str(e)}, status_code=500)
+
+
 
 # To run the application use command: uvicorn main:app --reload
 
