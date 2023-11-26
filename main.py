@@ -25,10 +25,10 @@ async def getcounter():
 async def root():
     return {"message": "Hello World"}
 
-@app.post("/api/report")
-async def receive_data(request: Request, screenshot1: Optional[UploadFile] = File(...), screenshot2: Optional[UploadFile] = File(...)):
-    form = await request.form()
-    issue = form.get('issue')
+# @app.post("/api/report")
+# async def receive_data(request: Request, screenshot1: Optional[UploadFile] = File(...), screenshot2: Optional[UploadFile] = File(...)):
+#     form = await request.form()
+#     issue = form.get('issue')
 
 #     # Save the files or process the data as needed
 
