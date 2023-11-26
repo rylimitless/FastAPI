@@ -32,20 +32,20 @@ async def receive_data(request: Request, screenshot1: Optional[UploadFile] = Fil
 
 #     # Save the files or process the data as needed
 
-    try:
-        if not os.path.exists("uploads"):
-            os.makedirs("uploads")
+    # try:
+    #     if not os.path.exists("uploads"):
+    #         os.makedirs("uploads")
 
-        with open(os.path.join("uploads", screenshot1.filename), "wb") as buffer:
-            content = await screenshot1.read()  # async read
-            buffer.write(content)
+    #     with open(os.path.join("uploads", screenshot1.filename), "wb") as buffer:
+    #         content = await screenshot1.read()  # async read
+    #         buffer.write(content)
 
-        with open(os.path.join("uploads", screenshot2.filename), "wb") as buffer:
-            content = await screenshot2.read()  # async read
-            buffer.write(content)
+    #     with open(os.path.join("uploads", screenshot2.filename), "wb") as buffer:
+    #         content = await screenshot2.read()  # async read
+    #         buffer.write(content)
 
-    except Exception as e:
-        return JSONResponse(content={"error": str(e)}, status_code=500)
+    # except Exception as e:
+    #     return JSONResponse(content={"error": str(e)}, status_code=500)
 
 
 
