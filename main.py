@@ -43,6 +43,3 @@ async def receive_data(request: Request, screenshot1: Optional[UploadFile] = Fil
 
     return {"message:success"}
 
-
-To run the application use command: uvicorn main:app --reload
-
