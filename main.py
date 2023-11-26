@@ -25,29 +25,24 @@ async def getcounter():
 async def root():
     return {"message": "Hello World"}
 
-# @app.post("/api/report")
-# async def receive_data(request: Request, screenshot1: Optional[UploadFile] = File(...), screenshot2: Optional[UploadFile] = File(...)):
-#     form = await request.form()
-#     issue = form.get('issue')
+@app.post("/api/report")
+async def receive_data(request: Request, screenshot1: Optional[UploadFile] = File(...), screenshot2: Optional[UploadFile] = File(...)):
+    form = await request.form()
+    issue = form.get('issue')
 
-#     # Save the files or process the data as needed
-
-    # try:
-    #     if not os.path.exists("uploads"):
-    #         os.makedirs("uploads")
-
-    #     with open(os.path.join("uploads", screenshot1.filename), "wb") as buffer:
-    #         content = await screenshot1.read()  # async read
-    #         buffer.write(content)
-
-    #     with open(os.path.join("uploads", screenshot2.filename), "wb") as buffer:
-    #         content = await screenshot2.read()  # async read
-    #         buffer.write(content)
-
-    # except Exception as e:
-    #     return JSONResponse(content={"error": str(e)}, status_code=500)
+    # Save the files or process the data as needed
 
 
+    with open(os.path.join("uploads", screenshot1.filename), "wb") as buffer:
+        content = await screenshot1.read()  # async read
+        buffer.write(content)
 
-# To run the application use command: uvicorn main:app --reload
+    with open(os.path.join("uploads", screenshot2.filename), "wb") as buffer:
+        content = await screenshot2.read()  # async read
+        buffer.write(content)
+
+    return {"message:success"}
+
+
+To run the application use command: uvicorn main:app --reload
 
